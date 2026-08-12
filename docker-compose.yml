@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: postgres_lighthouse
+    restart: always
+    environment:
+      - POSTGRES_USER=lighthouse
+      - POSTGRES_PASSWORD=lighthouse1
+      - POSTGRES_DB=LH_Nautical  # This automatically creates the database
+    ports:
+      - "5430:5432"
