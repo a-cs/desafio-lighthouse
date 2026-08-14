@@ -1,260 +1,260 @@
 CREATE TABLE addresses (
-    id TEXT,
-    customer_id TEXT,
+    id INTEGER,
+    customer_id INTEGER,
     address_type TEXT,
     postal_code TEXT,
     street TEXT,
-    number TEXT,
+    number INTEGER,
     complement TEXT,
     district TEXT,
     city TEXT,
     state TEXT,
     country TEXT,
-    is_primary TEXT
+    is_primary BOOLEAN
 );
 CREATE TABLE attributes (
-    id TEXT,
+    id INTEGER,
     name TEXT,
     data_type TEXT
 );
 CREATE TABLE brands (
-    id TEXT,
+    id INTEGER,
     name TEXT,
     country TEXT,
-    is_active TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    is_active BOOLEAN,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE categories (
-    id TEXT,
+    id INTEGER,
     name TEXT,
     slug TEXT,
-    parent_category_id TEXT,
-    is_active TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    parent_category_id INTEGER,
+    is_active BOOLEAN,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE customers (
-    id TEXT,
+    id INTEGER,
     person_type TEXT,
     legal_name TEXT,
     trade_name TEXT,
-    tax_id TEXT,
+    tax_id INTEGER,
     state_registration TEXT,
     email TEXT,
-    phone TEXT,
-    is_active TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    phone INTEGER,
+    is_active BOOLEAN,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE employees (
-    id TEXT,
+    id INTEGER,
     full_name TEXT,
-    cpf TEXT,
+    cpf INTEGER,
     email TEXT,
     role TEXT,
-    primary_location_id TEXT,
-    hire_date TEXT,
-    termination_date TEXT,
-    is_active TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    primary_location_id INTEGER,
+    hire_date DATE,
+    termination_date DATE,
+    is_active BOOLEAN,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE fiscal_invoices (
-    id TEXT,
-    order_id TEXT,
+    id INTEGER,
+    order_id INTEGER,
     nfe_number TEXT,
-    nfe_access_key TEXT,
-    series TEXT,
-    issued_at TEXT,
+    nfe_access_key INTEGER,
+    series INTEGER,
+    issued_at TIMESTAMP,
     status TEXT,
-    total_amount TEXT,
+    total_amount FLOAT,
     xml_storage_uri TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE goods_receipts (
-    id TEXT,
-    purchase_order_id TEXT,
-    received_by_employee_id TEXT,
-    received_at TEXT,
+    id INTEGER,
+    purchase_order_id INTEGER,
+    received_by_employee_id INTEGER,
+    received_at TIMESTAMP,
     notes TEXT,
-    created_at TEXT
+    created_at TIMESTAMP
 );
 CREATE TABLE goods_receipt_items (
-    id TEXT,
-    goods_receipt_id TEXT,
-    purchase_order_item_id TEXT,
-    quantity_received TEXT
+    id INTEGER,
+    goods_receipt_id INTEGER,
+    purchase_order_item_id INTEGER,
+    quantity_received FLOAT
 );
 CREATE TABLE locations (
-    id TEXT,
+    id INTEGER,
     name TEXT,
     location_type TEXT,
     postal_code TEXT,
     street TEXT,
-    number TEXT,
+    number INTEGER,
     complement TEXT,
     district TEXT,
     city TEXT,
     state TEXT,
     country TEXT,
-    is_active TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    is_active BOOLEAN,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE orders (
-    id TEXT,
+    id INTEGER,
     order_number TEXT,
     channel TEXT,
-    customer_id TEXT,
-    salesperson_id TEXT,
-    location_id TEXT,
+    customer_id INTEGER,
+    salesperson_id INTEGER,
+    location_id INTEGER,
     status TEXT,
-    subtotal TEXT,
-    discount_amount TEXT,
-    total TEXT,
-    placed_at TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    subtotal FLOAT,
+    discount_amount FLOAT,
+    total FLOAT,
+    placed_at TIMESTAMP,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE order_items (
-    id TEXT,
-    order_id TEXT,
-    product_variant_id TEXT,
-    quantity TEXT,
-    unit_price TEXT,
-    icms_rate TEXT,
-    ipi_rate TEXT,
-    line_total TEXT
+    id INTEGER,
+    order_id INTEGER,
+    product_variant_id INTEGER,
+    quantity INTEGER,
+    unit_price FLOAT,
+    icms_rate FLOAT,
+    ipi_rate FLOAT,
+    line_total FLOAT
 );
 CREATE TABLE payments (
-    id TEXT,
-    order_id TEXT,
+    id INTEGER,
+    order_id INTEGER,
     method TEXT,
-    installments TEXT,
-    amount TEXT,
+    installments INTEGER,
+    amount FLOAT,
     status TEXT,
-    paid_at TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    paid_at TIMESTAMP,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE products (
-    id TEXT,
+    id INTEGER,
     name TEXT,
     description TEXT,
-    brand_id TEXT,
-    category_id TEXT,
-    ncm_code TEXT,
+    brand_id INTEGER,
+    category_id INTEGER,
+    ncm_code INTEGER,
     unit_of_measure TEXT,
-    is_active TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    is_active BOOLEAN,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE product_suppliers (
-    product_variant_id TEXT,
-    supplier_id TEXT,
+    product_variant_id INTEGER,
+    supplier_id INTEGER,
     supplier_sku TEXT,
-    last_quoted_cost TEXT,
-    lead_time_days TEXT,
-    is_preferred TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    last_quoted_cost FLOAT,
+    lead_time_days INTEGER,
+    is_preferred BOOLEAN,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE product_variants (
-    id TEXT,
-    product_id TEXT,
+    id INTEGER,
+    product_id INTEGER,
     sku TEXT,
-    barcode_ean TEXT,
-    sale_price TEXT,
-    cost_price TEXT,
-    weight_kg TEXT,
-    icms_rate TEXT,
-    ipi_rate TEXT,
-    is_active TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    barcode_ean INTEGER,
+    sale_price FLOAT,
+    cost_price FLOAT,
+    weight_kg FLOAT,
+    icms_rate FLOAT,
+    ipi_rate FLOAT,
+    is_active BOOLEAN,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE purchase_orders (
-    id TEXT,
+    id INTEGER,
     po_number TEXT,
-    supplier_id TEXT,
-    buyer_id TEXT,
-    destination_location_id TEXT,
+    supplier_id INTEGER,
+    buyer_id INTEGER,
+    destination_location_id INTEGER,
     status TEXT,
     currency TEXT,
-    subtotal TEXT,
-    total TEXT,
-    placed_at TEXT,
-    expected_delivery_at TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    subtotal FLOAT,
+    total FLOAT,
+    placed_at TIMESTAMP,
+    expected_delivery_at DATE,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE purchase_order_items (
-    id TEXT,
-    purchase_order_id TEXT,
-    product_variant_id TEXT,
-    quantity_ordered TEXT,
-    unit_cost TEXT,
-    line_total TEXT
+    id INTEGER,
+    purchase_order_id INTEGER,
+    product_variant_id INTEGER,
+    quantity_ordered INTEGER,
+    unit_cost FLOAT,
+    line_total FLOAT
 );
 CREATE TABLE returns (
-    id TEXT,
+    id INTEGER,
     return_number TEXT,
-    order_id TEXT,
-    customer_id TEXT,
-    received_at_location_id TEXT,
+    order_id INTEGER,
+    customer_id INTEGER,
+    received_at_location_id INTEGER,
     status TEXT,
     reason TEXT,
-    total_refund_amount TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    total_refund_amount FLOAT,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE return_items (
-    id TEXT,
-    return_id TEXT,
-    order_item_id TEXT,
-    quantity TEXT,
+    id INTEGER,
+    return_id INTEGER,
+    order_item_id INTEGER,
+    quantity FLOAT,
     action TEXT,
-    exchange_variant_id TEXT,
-    unit_refund_amount TEXT
+    exchange_variant_id INTEGER,
+    unit_refund_amount FLOAT
 );
 CREATE TABLE stock_levels (
-    product_variant_id TEXT,
-    location_id TEXT,
-    quantity_on_hand TEXT,
+    product_variant_id INTEGER,
+    location_id INTEGER,
+    quantity_on_hand FLOAT,
     reorder_point TEXT,
-    updated_at TEXT
+    updated_at TIMESTAMP
 );
 CREATE TABLE stock_movements (
-    id TEXT,
-    product_variant_id TEXT,
-    location_id TEXT,
+    id INTEGER,
+    product_variant_id INTEGER,
+    location_id INTEGER,
     movement_type TEXT,
-    quantity TEXT,
+    quantity FLOAT,
     reference_table TEXT,
     reference_id TEXT,
     employee_id TEXT,
     notes TEXT,
-    occurred_at TEXT,
-    created_at TEXT
+    occurred_at TIMESTAMP,
+    created_at TIMESTAMP
 );
 CREATE TABLE suppliers (
-    id TEXT,
+    id INTEGER,
     legal_name TEXT,
     trade_name TEXT,
     country TEXT,
     tax_id TEXT,
     tax_id_type TEXT,
     email TEXT,
-    phone TEXT,
+    phone INTEGER,
     contact_name TEXT,
-    is_active TEXT,
-    created_at TEXT,
-    updated_at TEXT
+    is_active BOOLEAN,
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 CREATE TABLE variant_attribute_values (
-    product_variant_id TEXT,
-    attribute_id TEXT,
+    product_variant_id INTEGER,
+    attribute_id INTEGER,
     value TEXT
 );
