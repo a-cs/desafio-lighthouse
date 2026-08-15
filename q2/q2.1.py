@@ -3,7 +3,9 @@ import csv
 import sys
 from datetime import datetime
 
-folder_path = "../arquivos/"
+csv_folder_path = "../arquivos/"
+sql_folder_path = "../q2/"
+sql_file_name = "schema.sql"
 
 def infer_data_type(value):
     #infere o tipo de dado de uma string.
@@ -50,11 +52,11 @@ def infer_data_type(value):
     # Padrão é Texto
     return "TEXT" # se não for nenhum, retorn text
 
-def generate_sql_from_csvs_in_a_folder_infering_col_type(folder_path, sample_rows=1000):
+def generate_sql_from_csvs_in_a_folder_infering_col_type(csv_folder_path, sample_rows=1000):
     #checkar se o caminho da pasta espificada existe existe
     sql_schema = ""
-    if not os.path.isdir(folder_path):
-        print(f"Error: A pasta '{folder_path}' não existe. Corrija o caminho da pasta.")
+    if not os.path.isdir(csv_folder_path):
+        print(f"Error: A pasta '{csv_folder_path}' não existe. Corrija o caminho da pasta.")
         return
 
     #ranking dos tipos das colunas do sql
@@ -68,9 +70,9 @@ def generate_sql_from_csvs_in_a_folder_infering_col_type(folder_path, sample_row
     }
     
     #iterarar na lista de arquivos presentes na pasta 
-    for file_name in os.listdir(folder_path):
+    for file_name in os.listdir(csv_folder_path):
         if file_name.endswith(".csv"):
-            file_path = os.path.join(folder_path, file_name)
+            file_path = os.path.join(csv_folder_path, file_name)
 
             # gerar tabelas a partir do nome dos arquivos
             table_name = os.path.splitext(file_name)[0]
@@ -125,13 +127,12 @@ def generate_sql_from_csvs_in_a_folder_infering_col_type(folder_path, sample_row
                 
 
     #criar pasta caso ela não exita
-    sql_folder_path = "../questão-2/"
     os.makedirs(sql_folder_path, exist_ok=True)
+    
     #gravar os dados no arquivo .sql  
-    sql_file_name = "schema.sql"
     with open(os.path.join(sql_folder_path, sql_file_name), "w", encoding="utf-8") as file:
         file.write(sql_schema)
     print(f"Arquivo '{sql_file_name}' gerado com sucesso\nno caminho '{os.path.join(sql_folder_path, sql_file_name)}'\n")
 
 #gerar o sql de acordo com o csv e ler a qtd de sample_rows para determinar o tipo
-generate_sql_from_csvs_in_a_folder_infering_col_type(folder_path, sample_rows=100)
+generate_sql_from_csvs_in_a_folder_infering_col_type(csv_folder_path, sample_rows=100)
