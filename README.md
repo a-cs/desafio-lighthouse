@@ -71,7 +71,34 @@ ____
     - [x] Código SQL calculando:
 		- [x]  O Ticket Médio e a Diversidade de categorias por cliente.
 		- [x]  A identificação e filtro dos 10 clientes "Fiéis" (maior Ticket Médio entre aqueles com diversidade >= 13 categorias).
-  - [ ] 4.2
+  - [x] 4.2
+    - [x] Como você chegou nas categorias mais vendidas? (mapeamento da cadeia de chaves)
+        - >[!TIP]
+			> - A categoria mais vendida para o top 10 clientes é a category_id 8, com uma quantidade total de itens de 492, o código sql para encontrar essa informação consta no arquivo na pasta “./q4/q4.2.sql” no material completo. 
+			> - Para conseguir chegar nesse valor, utilizei a consulta da questão 4.1 como uma tabela temporária, para aí conseguir conectar o customer_id da tabela top 10 com o customer_id da tabela orders.
+			> - Conectei a tabela orders usando a coluna id, com a tabela order_items usando a coluna order_id.
+			> - Conectei a tabela order_items usando a coluna product_variant_id, com a tabela product_variants usando a coluna id.
+			> - Conectei a tabela product_variants usando a coluna product_id, com a tabela products usando a coluna id.
+			> - Com todas as tabela conectadas, selecionei a coluna category_id presente na tabela produtos e soma da quantity presente na tabela order_items.
+			> - Agrupei pelo category_id presente na tabela produtos.
+			> - Ordenei de forma Descendente pela quantidade de itens naquela categoria.
+			> - E por último limitei a apenas o primeiro valor, para chegar na categoria mais vendida dentro dos clientes top 10.
+    - [x] Como você chegou nas categorias mais vendidas? (mapeamento da cadeia de chaves)
+        - >[!TIP]
+			> - A lógica que utilizei para pegar os clientes com diversidade mínima foi, primeiro gerei a consulta para pegar o ticket médio por customer_id.
+			> - Depois gerei a consulta para pegar a diversidade de categorias (sem repetir valores) para cada customer_id.
+			> - Juntei os resultados das duas consultas usando o customer_id como chave para ligar elas.
+			> - Filtrei para mostrar apenas os valores com valor maior ou igual a 13 categorias.
+    - [x] Como garantiu que a contagem de itens refletisse apenas os Top 10?
+		- >[!TIP]
+			> - Para garantir o Top 10, primeiro gerei a consulta para pegar o ticket médio por customer_id.
+			> - Depois gerei a consulta para pegar a diversidade de categorias (sem repetir valores) para cada customer_id.
+			> - Juntei os resultados das duas consultas usando o customer_id como chave para ligar elas.
+			> - Filtrei para mostrar apenas os valores com valor maior ou igual a 13 categorias.
+			> - Depois ordenei de forma Descendente pelo Ticket Médio, para deixar do maior valor do ticket para o menor.
+			> - Depois ordenei de forma Ascendente pelo customer_id, para caso houvesse algum empate no valor do ticket médio.
+			> - Por último, limitei para mostrar apenas os 10 primeiros.
+
 ____
 
 - ## 5
