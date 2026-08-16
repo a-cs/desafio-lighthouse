@@ -67,7 +67,10 @@ ____
 ____
 
 - ## 4
-  - [ ] 4.1
+  - [x] 4.1
+    - [x] Código SQL calculando:
+		- [x]  O Ticket Médio e a Diversidade de categorias por cliente.
+		- [x]  A identificação e filtro dos 10 clientes "Fiéis" (maior Ticket Médio entre aqueles com diversidade >= 13 categorias).
   - [ ] 4.2
 ____
 
