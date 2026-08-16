@@ -16,8 +16,18 @@
 # Questões
 
 - ## 1
-  - [ ] 1.1
-  - [ ] 1.2
+  - [x] 1.1
+    - [x] Código SQL calculando:
+		- Quantidade total de linhas
+		- Intervalo de datas analisado (data mínima e máxima)
+		- Valor mínimo
+		- Valor máximo
+		- Valor médio
+  - [x] 1.2
+    - [x] Qual é o valor médio registrado na coluna "total"?
+		> [!TIP]
+		> Resposta: 28704,992077227675
+
   - [ ] 1.3
 ____
 
