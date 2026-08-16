@@ -31,13 +31,17 @@
   - [x] 1.3
     - [x] Possíveis outliers em "total"
     	> [!TIP]
-		> Resposta: Sobre outliers na coluna “total”, existem possíveis outliers na parte superior do Q3(Terceiro Quartil) + 1,5 * IQR (Intervalo Interquartil) acima do valor 82597,85. Chegando a um total de 452 valores de possíveis outliers de um total de 48998 linhas, que significam 0,92% do total.
+		> Sobre outliers na coluna “total”, existem possíveis outliers na parte superior do Q3(Terceiro Quartil) + 1,5 * IQR (Intervalo Interquartil) acima do valor 82597,85. Chegando a um total de 452 valores de possíveis outliers de um total de 48998 linhas, que significam 0,92% do total.
     - [x] Qualidade dos dados (valores nulos ou inconsistentes)
   		> [!TIP]
-		> Sobre a qualidade dos dados da tabela orders, na coluna  “salesperson_id”, existem 24131 ocorrências de um total de  48998 linhas, dando uma porcentagem de 49,25% valores nulos. Esse valor nos faz perceber que a qualidade da tabela está baixa e precisaria de tratamento desses valores
+		> Sobre a qualidade dos dados da tabela orders, na coluna  “salesperson_id”, existem 24131 ocorrências de um total de  48998 linhas, dando uma porcentagem de 49,25% valores nulos. Esse valor nos faz perceber que existem valores nulos, mas ao aprofundar a análise, percebemos que todos o valores nulos na “salesperson_id” acontecem quando “channel” tem o valor igual a "ecommerce", e por conta disso a falta provavelmente se deve a não terem cadastrado um valor padrão para o “salesperson_id”, quando a venda acontece pelo canal "ecommerce" e o usuário não informa o vendedor
     - [x] e se você considera que a tabela orders está pronta para análises ou se exigiria tratamento prévio ou relacionamento com demais tabelas?
 		> [!TIP]
-		> Sobre se a tabela "orders” está pronta para análises, podemos perceber que não, pois ainda precisaremos tratar os valores nulos que correspondem a 49,25% dos valores da coluna “salesperson_id”. Caso quisesse aprofundar ainda mais a análise da tabela orders, seria bom juntar com as informações das tabelas “customers” e “locations”,  para ter mais informações para usar de filtro.
+		> Sobre se a tabela "orders” está pronta para análises ou se precisa de algum tratamento, podemos perceber que depende. No caso de ser uma análise financeira do faturamento, os outlier presentes na coluna “total”, precisam estar presentes para não mascarar os valores reais de faturamento. Caso fosse para uma análise de previsão de estoque mensal ou faturamento médio dia-a-dia o ideal seria remover os outliers, para conseguir ter previsões mais corretas.
+		
+		> [!TIP]
+		> Sobre se a tabela "orders” precisa de relacionamento com demais tabelas, caso quisesse aprofundar ainda mais a análise da tabela “orders”, seria bom juntar com as informações por exemplo das tabelas “customers” e “locations”,  para ter mais informações para usar de filtro.
+
 
 ____
 
