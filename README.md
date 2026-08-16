@@ -32,10 +32,12 @@ ____
 ____
 
 - ## 3
-  - [ ] 3.1
+  - [x] 3.1
     - [x] criar script python para carregar todos os dados de cada tabela no banco
-  - [ ] 3.2
-    - [ ] Qual o total de linhas somadas das seguintes tabelas: customers, orders, order_items e payments?
+  - [x] 3.2
+    - [x] Qual o total de linhas somadas das seguintes tabelas: customers, orders, order_items e payments?
+		> [!TIP]
+		> Resposta: 251864
 ____
 
 - ## 4
