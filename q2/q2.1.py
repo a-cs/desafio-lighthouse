@@ -83,7 +83,8 @@ def generate_sql_from_csvs(csv_folder_path, sample_rows=1000):
         "TEXT": 6
     }
     
-    #iterarar na lista de arquivos presentes na pasta 
+    #iterarar na lista de arquivos presentes na pasta
+    print('Iterarando na lista de arquivos ".csv" presentes na pasta...')
     for file_name in os.listdir(csv_folder_path):
         if file_name.endswith(".csv"):
             file_path = os.path.join(csv_folder_path, file_name)
@@ -129,9 +130,11 @@ def generate_sql_from_csvs(csv_folder_path, sample_rows=1000):
                             col_types[col_name] = "TEXT"
 
                 # criar a tabela com as colunas
+                
                 columns = []
                 foreing_keys = []
                 foreing_keys_target_tables = []
+                print(f"Gerando código para a tabela {table_name}...")
                 for col_name in headers:
                     if col_name:
                         #atribuir o primery key a coluna "id" durante a criação da tabela
@@ -158,6 +161,7 @@ def generate_sql_from_csvs(csv_folder_path, sample_rows=1000):
                 sys.exit(1)
 
     #gerar as foreign keeys
+    print("Gerando o código para criar as foreign keys...")
     if table_with_foreign_keys:
         for table_name, fkeys_dict in table_with_foreign_keys.items():
             col_names = fkeys_dict["foreing_keys"]
@@ -180,11 +184,11 @@ def generate_sql_from_csvs(csv_folder_path, sample_rows=1000):
     
     #criar pasta caso ela não exita
     os.makedirs(sql_folder_path, exist_ok=True)
-    
+    print('Gerando o arquivo "schema.sql" ...')
     #gravar os dados no arquivo .sql  
     with open(os.path.join(sql_folder_path, sql_file_name), "w", encoding="utf-8") as file:
         file.write(sql_schema)
-    print(f"Arquivo '{sql_file_name}' gerado com sucesso\nno caminho '{os.path.join(sql_folder_path, sql_file_name)}'\n")
+    print(f'Arquivo "{sql_file_name}" gerado com sucesso no caminho "{os.path.join(sql_folder_path, sql_file_name)}"\n')
 
 #gerar o sql de acordo com o csv e ler a qtd de sample_rows para determinar o tipo
 generate_sql_from_csvs(csv_folder_path, sample_rows=100)
