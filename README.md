@@ -26,7 +26,7 @@
   - [x] 1.2
     - [x] Qual é o valor médio registrado na coluna "total"?
 		> [!TIP]
-		> Resposta: 28704,992077227675
+		> Resposta: 28704,99
 
   - [x] 1.3
     - [x] Possíveis outliers em "total"
