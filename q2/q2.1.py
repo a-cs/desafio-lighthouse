@@ -102,8 +102,8 @@ def generate_sql_from_csvs(csv_folder_path, sample_rows=1000):
                     headers = next(reader)  # ler o a linha de Header
                     col_types = {col_name: None for col_name in headers if col_name} # criar dicionario com o nome e o tipo da coluna
                     
-                    for row_idx, row in enumerate(reader): #iterar sobre a qtd de sample_rows, para detectar o tipo da coluna
-                        if row_idx >= sample_rows:
+                    for row_index, row in enumerate(reader): #iterar sobre a qtd de sample_rows, para detectar o tipo da coluna
+                        if row_index >= sample_rows:
                             break
                         for index, value in enumerate(row):
                             if index >= len(headers):
@@ -132,24 +132,29 @@ def generate_sql_from_csvs(csv_folder_path, sample_rows=1000):
                 # criar a tabela com as colunas
                 
                 columns = []
-                foreing_keys = []
-                foreing_keys_target_tables = []
                 print(f"Gerando código para a tabela {table_name}...")
                 for col_name in headers:
                     if col_name:
                         #atribuir o primery key a coluna "id" durante a criação da tabela
                         if col_name == "id":
-                            if table_name =="employees" :
+                            if table_name == "employees":
                                 columns.append(f"{col_name} TEXT PRIMARY KEY")
                             else:
                                 columns.append(f"{col_name} {col_types[col_name]} PRIMARY KEY")
                         else:
-                            if col_name.endswith("_id"):
-                                foreing_keys.append(col_name)
-                                foreing_keys_target_tables.append(get_target_table(col_name))
-                            columns.append(f"{col_name} {col_types[col_name]}")
-                if foreing_keys:
-                    table_with_foreign_keys[table_name] = {"foreing_keys": foreing_keys, "target_tables": foreing_keys_target_tables}
+                            # if col_name.endswith("_id"):
+                            #     foreing_keys.append(col_name)
+                            #     foreing_keys_target_tables.append(get_target_table(col_name))
+                            if (
+                                table_name == "customers" and col_name in ["tax_id","phone"]
+                                or table_name == "employees" and col_name in ["cpf"]
+                                or table_name == "fiscal_invoices" and col_name in ["nfe_access_key"]
+                                or table_name == "product_variants" and col_name in ["barcode_ean"]
+                                or table_name == "suppliers" and col_name in ["phone"]
+                               ):
+                                columns.append(f"{col_name} TEXT")
+                            else:
+                                columns.append(f"{col_name} {col_types[col_name]}")
                 if columns:
                     sql_schema += f"CREATE TABLE {table_name} (\n"
                     sql_schema += ",\n".join(columns)
@@ -160,28 +165,6 @@ def generate_sql_from_csvs(csv_folder_path, sample_rows=1000):
                 print(f"Erro ao ler o arquivo '{file_name}': {e}\n")
                 sys.exit(1)
 
-    #gerar as foreign keeys
-    print("Gerando o código para criar as foreign keys...")
-    if table_with_foreign_keys:
-        for table_name, fkeys_dict in table_with_foreign_keys.items():
-            col_names = fkeys_dict["foreing_keys"]
-            target_tables = fkeys_dict["target_tables"]
-            if any(item in target_tables for item in tables):
-                valid_constraints = []
-                for i in range(len(col_names)):
-                    if target_tables[i] in tables:
-                        constraint_str = (
-                            f"ADD CONSTRAINT fk_{table_name}_{target_tables[i]}\n"
-                            f"FOREIGN KEY ({col_names[i]}) REFERENCES {target_tables[i]}(id)"
-                        )
-                        valid_constraints.append(constraint_str)
-                
-                # Se houver chaves válidas para essa tabela, monta o comando agrupado corretamente
-                if valid_constraints:
-                    sql_schema += f"ALTER TABLE {table_name}\n"
-                    sql_schema += ",\n".join(valid_constraints)  # Separa multiplas FKs por VÍRGULA
-                    sql_schema += ";\n\n"     
-    
     #criar pasta caso ela não exita
     os.makedirs(sql_folder_path, exist_ok=True)
     print('Gerando o arquivo "schema.sql" ...')

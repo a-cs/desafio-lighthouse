@@ -9,3 +9,5 @@ services:
       - POSTGRES_DB=LH_Nautical  # This automatically creates the database
     ports:
       - "5430:5432"
+    volumes:
+      - ./q2/schema.sql:/docker-entrypoint-initdb.d/init.sql

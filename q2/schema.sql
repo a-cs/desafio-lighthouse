@@ -43,10 +43,10 @@ id INTEGER PRIMARY KEY,
 person_type TEXT,
 legal_name TEXT,
 trade_name TEXT,
-tax_id INTEGER,
+tax_id TEXT,
 state_registration TEXT,
 email TEXT,
-phone INTEGER,
+phone TEXT,
 is_active BOOLEAN,
 created_at TIMESTAMP,
 updated_at TIMESTAMP
@@ -55,7 +55,7 @@ updated_at TIMESTAMP
 CREATE TABLE employees (
 id TEXT PRIMARY KEY,
 full_name TEXT,
-cpf INTEGER,
+cpf TEXT,
 email TEXT,
 role TEXT,
 primary_location_id INTEGER,
@@ -70,7 +70,7 @@ CREATE TABLE fiscal_invoices (
 id INTEGER PRIMARY KEY,
 order_id INTEGER,
 nfe_number TEXT,
-nfe_access_key INTEGER,
+nfe_access_key TEXT,
 series INTEGER,
 issued_at TIMESTAMP,
 status TEXT,
@@ -180,7 +180,7 @@ CREATE TABLE product_variants (
 id INTEGER PRIMARY KEY,
 product_id INTEGER,
 sku TEXT,
-barcode_ean INTEGER,
+barcode_ean TEXT,
 sale_price FLOAT,
 cost_price FLOAT,
 weight_kg FLOAT,
@@ -269,7 +269,7 @@ country TEXT,
 tax_id TEXT,
 tax_id_type TEXT,
 email TEXT,
-phone INTEGER,
+phone TEXT,
 contact_name TEXT,
 is_active BOOLEAN,
 created_at TIMESTAMP,
@@ -281,96 +281,4 @@ product_variant_id INTEGER,
 attribute_id INTEGER,
 value TEXT
 );
-
-ALTER TABLE addresses
-ADD CONSTRAINT fk_addresses_customers
-FOREIGN KEY (customer_id) REFERENCES customers(id);
-
-ALTER TABLE fiscal_invoices
-ADD CONSTRAINT fk_fiscal_invoices_orders
-FOREIGN KEY (order_id) REFERENCES orders(id);
-
-ALTER TABLE goods_receipts
-ADD CONSTRAINT fk_goods_receipts_purchase_orders
-FOREIGN KEY (purchase_order_id) REFERENCES purchase_orders(id);
-
-ALTER TABLE goods_receipt_items
-ADD CONSTRAINT fk_goods_receipt_items_goods_receipts
-FOREIGN KEY (goods_receipt_id) REFERENCES goods_receipts(id),
-ADD CONSTRAINT fk_goods_receipt_items_purchase_order_items
-FOREIGN KEY (purchase_order_item_id) REFERENCES purchase_order_items(id);
-
-ALTER TABLE orders
-ADD CONSTRAINT fk_orders_customers
-FOREIGN KEY (customer_id) REFERENCES customers(id),
-ADD CONSTRAINT fk_orders_locations
-FOREIGN KEY (location_id) REFERENCES locations(id);
-
-ALTER TABLE order_items
-ADD CONSTRAINT fk_order_items_orders
-FOREIGN KEY (order_id) REFERENCES orders(id),
-ADD CONSTRAINT fk_order_items_product_variants
-FOREIGN KEY (product_variant_id) REFERENCES product_variants(id);
-
-ALTER TABLE payments
-ADD CONSTRAINT fk_payments_orders
-FOREIGN KEY (order_id) REFERENCES orders(id);
-
-ALTER TABLE products
-ADD CONSTRAINT fk_products_brands
-FOREIGN KEY (brand_id) REFERENCES brands(id),
-ADD CONSTRAINT fk_products_categories
-FOREIGN KEY (category_id) REFERENCES categories(id);
-
-ALTER TABLE product_suppliers
-ADD CONSTRAINT fk_product_suppliers_product_variants
-FOREIGN KEY (product_variant_id) REFERENCES product_variants(id),
-ADD CONSTRAINT fk_product_suppliers_suppliers
-FOREIGN KEY (supplier_id) REFERENCES suppliers(id);
-
-ALTER TABLE product_variants
-ADD CONSTRAINT fk_product_variants_products
-FOREIGN KEY (product_id) REFERENCES products(id);
-
-ALTER TABLE purchase_orders
-ADD CONSTRAINT fk_purchase_orders_suppliers
-FOREIGN KEY (supplier_id) REFERENCES suppliers(id);
-
-ALTER TABLE purchase_order_items
-ADD CONSTRAINT fk_purchase_order_items_purchase_orders
-FOREIGN KEY (purchase_order_id) REFERENCES purchase_orders(id),
-ADD CONSTRAINT fk_purchase_order_items_product_variants
-FOREIGN KEY (product_variant_id) REFERENCES product_variants(id);
-
-ALTER TABLE returns
-ADD CONSTRAINT fk_returns_orders
-FOREIGN KEY (order_id) REFERENCES orders(id),
-ADD CONSTRAINT fk_returns_customers
-FOREIGN KEY (customer_id) REFERENCES customers(id);
-
-ALTER TABLE return_items
-ADD CONSTRAINT fk_return_items_returns
-FOREIGN KEY (return_id) REFERENCES returns(id),
-ADD CONSTRAINT fk_return_items_order_items
-FOREIGN KEY (order_item_id) REFERENCES order_items(id);
-
-ALTER TABLE stock_levels
-ADD CONSTRAINT fk_stock_levels_product_variants
-FOREIGN KEY (product_variant_id) REFERENCES product_variants(id),
-ADD CONSTRAINT fk_stock_levels_locations
-FOREIGN KEY (location_id) REFERENCES locations(id);
-
-ALTER TABLE stock_movements
-ADD CONSTRAINT fk_stock_movements_product_variants
-FOREIGN KEY (product_variant_id) REFERENCES product_variants(id),
-ADD CONSTRAINT fk_stock_movements_locations
-FOREIGN KEY (location_id) REFERENCES locations(id),
-ADD CONSTRAINT fk_stock_movements_employees
-FOREIGN KEY (employee_id) REFERENCES employees(id);
-
-ALTER TABLE variant_attribute_values
-ADD CONSTRAINT fk_variant_attribute_values_product_variants
-FOREIGN KEY (product_variant_id) REFERENCES product_variants(id),
-ADD CONSTRAINT fk_variant_attribute_values_attributes
-FOREIGN KEY (attribute_id) REFERENCES attributes(id);
 
