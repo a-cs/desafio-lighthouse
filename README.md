@@ -28,7 +28,17 @@
 		> [!TIP]
 		> Resposta: 28704,992077227675
 
-  - [ ] 1.3
+  - [x] 1.3
+    - [x] Possíveis outliers em "total"
+    	> [!TIP]
+		> Resposta: Sobre outliers na coluna “total”, existem possíveis outliers na parte superior do Q3(Terceiro Quartil) + 1,5 * IQR (Intervalo Interquartil) acima do valor 82597,85. Chegando a um total de 452 valores de possíveis outliers de um total de 48998 linhas, que significam 0,92% do total.
+    - [x] Qualidade dos dados (valores nulos ou inconsistentes)
+  		> [!TIP]
+		> Sobre a qualidade dos dados da tabela orders, na coluna  “salesperson_id”, existem 24131 ocorrências de um total de  48998 linhas, dando uma porcentagem de 49,25% valores nulos. Esse valor nos faz perceber que a qualidade da tabela está baixa e precisaria de tratamento desses valores
+    - [x] e se você considera que a tabela orders está pronta para análises ou se exigiria tratamento prévio ou relacionamento com demais tabelas?
+		> [!TIP]
+		> Sobre se a tabela "orders” está pronta para análises, podemos perceber que não, pois ainda precisaremos tratar os valores nulos que correspondem a 49,25% dos valores da coluna “salesperson_id”. Caso quisesse aprofundar ainda mais a análise da tabela orders, seria bom juntar com as informações das tabelas “customers” e “locations”,  para ter mais informações para usar de filtro.
+
 ____
 
 - ## 2
@@ -48,6 +58,8 @@ ____
     - [x] Qual o total de linhas somadas das seguintes tabelas: customers, orders, order_items e payments?
 		> [!TIP]
 		> Resposta: 251864
+
+# Fix code text 1.3
 ____
 
 - ## 4
